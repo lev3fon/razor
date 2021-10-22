@@ -8,5 +8,10 @@ namespace BadNews.Controllers
         {
             return View(code);
         }
+
+        public IActionResult Exception()
+        {
+            return View(null, HttpContext.TraceIdentifier);
+        }
     }
 }

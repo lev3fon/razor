@@ -19,6 +19,7 @@ namespace BadNews
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseEnvironment(Environments.Development);
                 });
         }
 

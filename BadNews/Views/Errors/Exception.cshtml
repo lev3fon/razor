@@ -1,0 +1,46 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Bad News</title>
+    <meta name="theme-color" content="#563d7c" />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+<div class="container">
+    <header class="news-header">
+        <a class="news-header-logo text-dark" href="/">Bad News</a>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2"></div>
+
+    <!-- Header /-->
+</div>
+
+<!-- Body -->
+
+<main role="main" class="container">
+    <h3 class="text-center text-danger">Во время обработки вашего запроса возникла ошибка</h3>
+
+    @if (!string.IsNullOrEmpty(Model))
+    {
+        <p class="text-center"><strong>Request ID:</strong> <code>@Model</code></p>
+    }
+
+    <p class="text-center"><a href="/">Вернуться на главную страницу</a></p>
+</main>
+
+<!--/ Body -->
+
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/js/site.js"></script>
+</body>
+</html>
