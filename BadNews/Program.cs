@@ -2,6 +2,7 @@ using System.Linq;
 using BadNews.Repositories.News;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace BadNews
 {
@@ -20,7 +21,9 @@ namespace BadNews
                 {
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseEnvironment(Environments.Development);
-                });
+                })
+                .UseSerilog((hostingContext, loggerConfiguration) =>
+                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
         }
 
         private static void InitializeDataBase()
