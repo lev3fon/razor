@@ -1,0 +1,29 @@
+﻿@model int?
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <style>
+        .error-code {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 100px;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .main-page-link {
+            margin-top: 20px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+    <title>Bad News</title>
+</head>
+<body>
+<div class="error-code" id="error-code">@(Model?.ToString() ?? "Неизвестный код состояния")</div>
+<div class="main-page-link"><a href="/">Вернуться на главную страницу</a></div>
+</body>
+</html>
