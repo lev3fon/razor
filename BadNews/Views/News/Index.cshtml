@@ -5,7 +5,7 @@
     <div class="row mb-2">
     @foreach (var article in Model.FeaturedArticles)
     {
-        var url = $"/news/fullarticle/{HttpUtility.UrlEncode(article.Id.ToString())}";
+        // var url = $"/news/fullarticle/{HttpUtility.UrlEncode(article.Id.ToString())}";
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
@@ -14,7 +14,7 @@
                     <p class="card-text mb-auto">
                         @article.Teaser
                     </p>
-                    <a href=@(url)>Читать полностью</a>
+                    <a asp-controller="News" asp-action="FullArticle" asp-route-id="@article.Id">Читать полностью</a>
                 </div>
             </div>
         </div>
@@ -39,28 +39,39 @@
                   <p class="mb-auto">
                       @article.Teaser
                   </p>
-                  <a href=@(url)>Читать полностью</a>
+                  <a asp-controller="News" asp-action="FullArticle" asp-route-id="@article.Id">Читать полностью</a>
               </div>
                 
             }
 
             <nav class="news-pagination">
-                 @{
-                        var newerUrl = !Model.IsFirst
-                            ? $"/news?pageIndex={HttpUtility.UrlEncode((Model.PageIndex - 1).ToString())}"
-                            : "";
-                        var olderUrl = !Model.IsLast
-                            ? $"/news?pageIndex={HttpUtility.UrlEncode((Model.PageIndex + 1).ToString())}"
-                            : "";
-                    }
-                <!-- <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Новее</a> -->
-                <a class="btn btn-outline-primary" href="@(newerUrl)">
-                    Новее
-                </a>
-                <!-- <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Старше</a> -->
-                <a class="btn btn-outline-primary" href="@(olderUrl)">
-                    Старше
-                </a>
+                 @if (Model.IsFirst)
+                 {
+                     <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Новее</a>
+                 }
+                 else
+                 {
+                     <a 
+                         class="btn btn-outline-primary" 
+                         asp-controller="News" 
+                         asp-route-pageIndex="@(Model.PageIndex - 1)">
+                         Новее
+                     </a>
+                 }
+                 
+                 @if (Model.IsLast)
+                 {
+                     <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Старше</a>
+                 }
+                 else
+                 {
+                     <a
+                         class="btn btn-outline-primary"
+                         asp-controller="News"
+                         asp-route-pageIndex="@(Model.PageIndex + 1)">
+                         Старше
+                     </a>
+                 }
             </nav>
         </div>
 
