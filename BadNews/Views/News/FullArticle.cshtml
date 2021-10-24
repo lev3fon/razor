@@ -1,31 +1,4 @@
 ﻿@model BadNews.Models.News.FullArticleModel
-@using System.Globalization
-@{
-    var culture = CultureInfo.CreateSpecificCulture("ru-ru");
-}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Bad News</title>
-    <meta name="theme-color" content="#563d7c" />
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
-          rel="stylesheet" />
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/site.css" />
-</head>
-<body>
-<div class="container">
-    <header class="news-header">
-        <a class="news-header-logo text-dark" href="/">Bad News</a>
-    </header>
-
-    <div class="nav-scroller py-1 mb-2"></div>
-
-    <!-- Header /-->
-</div>
 
 <!-- Body -->
 
@@ -35,7 +8,7 @@
             <div class="news-article">
                 <h4 class="news-article-title">@Model.Article.Header</h4>
                 <p class="news-article-meta">
-                     @Model.Article.Date.ToString("d MMM yyyy", culture)
+                     @Model.Article.Date.ToString("d MMM yyyy", ViewBag.Culture)
                 </p>
                 @Html.Raw(Model.Article.ContentHtml)
             </div>
@@ -53,9 +26,3 @@
 </footer>
 
 <!--/ Body -->
-
-<script src="/lib/jquery/dist/jquery.min.js"></script>
-<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-<script src="/js/site.js"></script>
-</body>
-</html>
