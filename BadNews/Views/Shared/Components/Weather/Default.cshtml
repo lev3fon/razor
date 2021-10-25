@@ -1,0 +1,10 @@
+﻿@model BadNews.Repositories.Weather.WeatherForecast
+@{
+    string FormatTemperature(int temperature) => temperature > 0 ? $"+{temperature}" : temperature.ToString();
+}
+
+<div class="p-4 bg-secondary text-light rounded weather-container">
+    <h3>Погода сейчас</h3>
+    <div class="mb-2 weather-temperature">@FormatTemperature(Model.TemperatureInCelsius)</div>
+    <div><img src="@Model.IconUrl"/></div>
+</div>
