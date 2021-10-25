@@ -11,7 +11,7 @@
                         <input asp-for="Header" type="text" size="80">
                     </div>
                     <div>
-                        <span class="text-danger"></span>
+                        <span class="text-danger" asp-validation-for="Header"></span>
                     </div>
                 </div>
                 <div class="p-2">
@@ -22,7 +22,7 @@
                         <textarea asp-for="Teaser" cols="80" rows="5"></textarea>
                     </div>
                     <div>
-                        <span class="text-danger"></span>
+                        <span class="text-danger" asp-validation-for="Teaser"></span>
                     </div>
                 </div>
                 <div class="p-2">
@@ -31,7 +31,7 @@
                         <textarea asp-for="ContentHtml" cols="80" rows="15"></textarea>
                     </div>
                     <div>
-                        <span class="text-danger"></span>
+                        <span class="text-danger" asp-validation-for="ContentHtml"></span>
                     </div>
                 </div>
                 <div class="p-2 mb-4 text-center">
