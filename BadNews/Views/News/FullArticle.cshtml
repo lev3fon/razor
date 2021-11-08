@@ -1,4 +1,5 @@
-﻿@model BadNews.Models.News.FullArticleModel
+﻿@using BadNews.Elevation
+@model BadNews.Models.News.FullArticleModel
 
 <!-- Body -->
 
@@ -8,8 +9,15 @@
             <div class="news-article">
                 <h4 class="news-article-title">@Model.Article.Header</h4>
                 <p class="news-article-meta">
-                     @Model.Article.Date.ToString("d MMM yyyy", ViewBag.Culture)
+                    @Model.Article.Date.ToString("d MMM yyyy", ViewBag.Culture)
                 </p>
+                @if (ViewContext.IsElevated())
+                {
+                    <form class="mb-4" onsubmit="return confirm('Удалить новость?')"
+                        asp-controller="Editor" asp-action="DeleteArticle" asp-route-id="@(Model.Article.Id)">
+                        <button type="submit" class="btn-danger">Удалить</button>
+                    </form>
+                }
                 @Html.Raw(Model.Article.ContentHtml)
             </div>
         </div>
