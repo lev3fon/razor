@@ -62,6 +62,10 @@ namespace BadNews
                     action = "StatusCode"
                 });
             });
+            app.MapWhen(context => context.Request.IsElevated(), branchApp =>
+            {
+                branchApp.UseDirectoryBrowser("/files");
+            });
 
             // app.Map("/news/fullarticle", fullArticleApp =>
             // {
