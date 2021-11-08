@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
@@ -8,9 +9,19 @@ namespace BadNews.Repositories.Weather
         private const string defaultWeatherImageUrl = "/images/cloudy.png";
 
         private readonly Random random = new Random();
+        private readonly OpenWeatherClient weatherClient;
+
+        public WeatherForecastRepository(IOptions<OpenWeatherOptions> weatherOptions)
+        {
+            weatherClient = new OpenWeatherClient(weatherOptions?.Value.ApiKey);
+        }
 
         public async Task<WeatherForecast> GetWeatherForecastAsync()
         {
+            var weatherForecast = await weatherClient.GetWeatherFromApiAsync();
+            if (weatherForecast != null)
+                return WeatherForecast.CreateFrom(weatherForecast);
+
             return BuildRandomForecast();
         }
 
