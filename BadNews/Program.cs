@@ -57,7 +57,7 @@ namespace BadNews
 
         private static void InitializeDataBase()
         {
-            const int newsArticleCount = 100;
+            const int newsArticleCount = 5000;
 
             var generator = new NewsGenerator();
             var articles = generator.GenerateNewsArticles()
