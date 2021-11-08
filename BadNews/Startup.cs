@@ -35,6 +35,7 @@ namespace BadNews
             services.AddSingleton<INewsModelBuilder, NewsModelBuilder>();
             services.AddSingleton<IValidationAttributeAdapterProvider, StopWordsAttributeAdapterProvider>();
             services.AddSingleton<IWeatherForecastRepository, WeatherForecastRepository>();
+            services.AddMemoryCache();
             services.Configure<OpenWeatherOptions>(configuration.GetSection("OpenWeather"));
             var mvcBuilder = services.AddControllersWithViews();
             if (env.IsDevelopment())

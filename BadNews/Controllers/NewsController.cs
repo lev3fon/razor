@@ -1,6 +1,7 @@
 ﻿using System;
 using BadNews.ModelBuilders.News;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BadNews.Controllers
 {
@@ -8,9 +9,11 @@ namespace BadNews.Controllers
     public class NewsController : Controller
     {
         private readonly INewsModelBuilder newsModelBuilder;
+        private readonly IMemoryCache cache;
 
-        public NewsController(INewsModelBuilder newsModelBuilder)
+        public NewsController(INewsModelBuilder newsModelBuilder, IMemoryCache cache)
         {
+            this.cache = cache;
             this.newsModelBuilder = newsModelBuilder;
         }
 
@@ -23,7 +26,18 @@ namespace BadNews.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult FullArticle(Guid id)
         {
-            var model = newsModelBuilder.BuildFullArticleModel(id);
+            var key = $"{nameof(NewsController)}_{nameof(FullArticle)}_{id}";
+            if (!cache.TryGetValue(key, out var model))
+            {
+                model = newsModelBuilder.BuildFullArticleModel(id);
+                if (model != null)
+                {
+                    cache.Set(key, model, new MemoryCacheEntryOptions
+                    {
+                        SlidingExpiration = TimeSpan.FromSeconds(30)
+                    });
+                }
+            }
             
             if (model == null)
                 return NotFound();
