@@ -37,6 +37,10 @@ namespace BadNews
             var mvcBuilder = services.AddControllersWithViews();
             if (env.IsDevelopment())
                 mvcBuilder.AddRazorRuntimeCompilation();
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+            });
         }
 
         // В этом методе конфигурируется последовательность обработки HTTP-запроса
@@ -48,6 +52,7 @@ namespace BadNews
                 app.UseExceptionHandler("/Errors/Exception");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseResponseCompression();
             app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
             app.UseSerilogRequestLogging();
             app.UseMiddleware<ElevationMiddleware>();
