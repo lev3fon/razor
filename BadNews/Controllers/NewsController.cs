@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BadNews.Controllers
 {
+    [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Client, VaryByHeader = "Cookie")]
     public class NewsController : Controller
     {
         private readonly INewsModelBuilder newsModelBuilder;
@@ -19,6 +20,7 @@ namespace BadNews.Controllers
             return View(model);
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult FullArticle(Guid id)
         {
             var model = newsModelBuilder.BuildFullArticleModel(id);
