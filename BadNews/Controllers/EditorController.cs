@@ -1,4 +1,5 @@
 ﻿using System;
+using BadNews.Elevation;
 using BadNews.Models.Editor;
 using BadNews.Repositories.News;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace BadNews.Controllers
     {
         private readonly INewsRepository newsRepository;
 
+        [ElevationRequiredFilter]
         public EditorController(INewsRepository newsRepository)
         {
             this.newsRepository = newsRepository;
